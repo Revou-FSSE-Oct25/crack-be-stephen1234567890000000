@@ -32,7 +32,36 @@ class ScheduleController {
 
   static async getAllSchedules(req, res, next) {
     try {
-      
+      const {Serviceid} = req.params;
+
+      const result = await ScheduleService.getAllSchedules(Serviceid);
+
+      if (!result) {
+        return next({
+          statusCode: 404,
+          message: "No schedules found",
+        });
+      }
+
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteSchedule(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await ScheduleService.deleteSchedule(id);
+
+      if (!result) {
+        return next({
+          statusCode: 404,
+          message: "Schedule not found",
+        });
+      }
+
+      res.status(200).json({ message: "Schedule deleted successfully" });
     } catch (error) {
       next(error);
     }

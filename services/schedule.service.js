@@ -76,6 +76,41 @@ class ScheduleService {
 
     return schedule;
   }
+
+  static async getAllSchedules(ServiceId) {
+    // console.log(ServiceId);
+    
+    const schedules = await Schedule.findAll({
+      where: { ServiceId },
+      include: [
+        {
+          model: Service,
+          attributes: ["name", "duration", "description", "price"],
+        },
+      ],
+      order: [
+        ["date", "ASC"],
+        ["startTime", "ASC"],
+      ],
+    });
+
+    return schedules;
+  }
+
+  static async deleteSchedule(id) {
+    const schedule = await Schedule.findByPk(id);
+
+    if (!schedule) {
+      throw {
+        statusCode: 404,
+        message: "Schedule not found",
+      };
+    }
+
+    await schedule.destroy();
+
+    return true;
+  }
 }
 
 module.exports = ScheduleService;

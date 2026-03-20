@@ -1,5 +1,6 @@
 const authorizedAdmin = (req, res, next) => {
   try {
+    
     if (req.user.role !== "admin") {
       throw {
         statusCode: 403,

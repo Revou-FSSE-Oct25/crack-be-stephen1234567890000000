@@ -20,7 +20,23 @@ class AuthController {
     }
   }
 
-  static async login(req, res) {}
+  static async login(req, res, next) {
+    try {
+      const {email, password} = req.body;
+      const result = await AuthServices.login(email, password);
+
+      if (!result) {
+        return next({
+          statusCode: 404,
+          message: "Login failed",
+        });
+      }
+
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = AuthController;

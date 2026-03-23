@@ -32,7 +32,7 @@ class ScheduleController {
 
   static async getAllSchedules(req, res, next) {
     try {
-      const {Serviceid} = req.params;
+      const { Serviceid } = req.params;
 
       const result = await ScheduleService.getAllSchedules(Serviceid);
 

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Yoga Class",
+    "description": "Relaxing yoga session for flexibility and balance",
+    "duration": 90,
+    "price": 150000
+  },
+  {
+    "name": "HIIT Workout",
+    "description": "High intensity interval training for fat burning",
+    "duration": 45,
+    "price": 175000
+  },
+  {
+    "name": "Strength Training",
+    "description": "Muscle building and strength improvement session",
+    "duration": 75,
+    "price": 250000
+  },
+  {
+    "name": "Zumba Dance",
+    "description": "Fun cardio dance workout",
+    "duration": 60,
+    "price": 120000
+  },
+  {
+    "name": "Pilates",
+    "description": "Core strength and posture improvement training",
+    "duration": 60,
+    "price": 180000
+  },
+  {
+    "name": "CrossFit",
+    "description": "Functional fitness and endurance training",
+    "duration": 90,
+    "price": 300000
+  }
+]

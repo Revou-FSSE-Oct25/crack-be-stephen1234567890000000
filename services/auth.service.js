@@ -16,6 +16,27 @@ class AuthServices {
 
     const newUser = await User.create({ name, email, password });
 
+    if (!newUser.name) {
+      throw {
+        statusCode: 400,
+        message: "Name is required",
+      };
+    }
+
+    if (!newUser.email) {
+      throw {
+        statusCode: 400,
+        message: "Email is required",
+      };
+    }
+
+    if (!newUser.password) {
+      throw {
+        statusCode: 400,
+        message: "Password is required",
+      };
+    }
+
     const accessToken = token({
       id: newUser.id,
       name: newUser.name,

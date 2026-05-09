@@ -14,23 +14,44 @@ class AuthServices {
       };
     }
 
-    const newUser = await User.create({ name, email, password });
-
-    if (!newUser.name) {
+    if (!name) {
       throw {
         statusCode: 400,
         message: "Name is required",
       };
     }
 
-    if (!newUser.email) {
+    if (!email) {
       throw {
         statusCode: 400,
         message: "Email is required",
       };
     }
 
-    if (!newUser.password) {
+    if (!password) {
+      throw {
+        statusCode: 400,
+        message: "Password is required",
+      };
+    }
+
+    const newUser = await User.create({ name, email, password });
+
+    if (!name) {
+      throw {
+        statusCode: 400,
+        message: "Name is required",
+      };
+    }
+
+    if (!email) {
+      throw {
+        statusCode: 400,
+        message: "Email is required",
+      };
+    }
+
+    if (!password) {
       throw {
         statusCode: 400,
         message: "Password is required",

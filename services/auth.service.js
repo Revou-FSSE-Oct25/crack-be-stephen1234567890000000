@@ -41,8 +41,8 @@ class AuthServices {
 
     if (!user) {
       throw {
-        statusCode: 404,
-        message: "User not found",
+        statusCode: 401,
+        message: "Invalid email or password",
       };
     }
 
@@ -50,7 +50,7 @@ class AuthServices {
 
     if (!isPasswordvalid) {
       throw {
-        statusCode: 400,
+        statusCode: 401,
         message: "Invalid email or password",
       };
     }

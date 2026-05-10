@@ -87,6 +87,9 @@ class ScheduleService {
           model: Service,
           attributes: ["name", "duration", "description", "price"],
         },
+        {
+          model: User
+        }
       ],
       order: [
         ["date", "ASC"],

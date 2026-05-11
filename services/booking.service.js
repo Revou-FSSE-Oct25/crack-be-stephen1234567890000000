@@ -260,8 +260,8 @@ class BookingService {
   }
 
   static async complete(bookingId, user) {
-    console.log(bookingId, 'ini booking');
-    
+    console.log(bookingId, "ini booking");
+
     const booking = await Booking.findByPk(bookingId, {
       include: {
         model: Schedule,
@@ -276,10 +276,7 @@ class BookingService {
       };
     }
 
-    if (
-      user.role !== "admin" &&
-      user.id !== booking.Schedule.TrainerId
-    ) {
+    if (user.role !== "admin" && user.id !== booking.Schedule.TrainerId) {
       throw {
         statusCode: 403,
         message: "Forbidden action",

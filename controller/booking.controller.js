@@ -83,7 +83,7 @@ class BookingController {
 
   static async findAllByAdmin(req, res, next) {
     try {
-      const result = BookingService.findAllByAdmin();
+      const result = await BookingService.findAllByAdmin();
 
       if (!result) {
         return next({

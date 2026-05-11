@@ -24,6 +24,16 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        ServiceId: 2,
+        TrainerId: 2,
+        date: new Date("2026-05-15"),
+        startTime: "18:30",
+        endTime: "19:00",
+        capacity: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         ServiceId: 3,
         TrainerId: 2,
         date: new Date("2026-05-15"),

@@ -102,18 +102,18 @@ class BookingService {
       order: [[{ model: Schedule }, "startTime", "ASC"]],
     });
 
-    // return myBookings;
+    return myBookings;
 
-    const formatted = myBookings.map((b) => ({
-      id: b.id,
-      status: b.status,
-      date: b.Schedule.date,
-      startTime: b.Schedule.startTime,
-      endTime: b.Schedule.endTime,
-      trainerName: b.Schedule.User.name,
-    }));
+    // const formatted = myBookings.map((b) => ({
+    //   id: b.id,
+    //   status: b.status,
+    //   date: b.Schedule.date,
+    //   startTime: b.Schedule.startTime,
+    //   endTime: b.Schedule.endTime,
+    //   trainerName: b.Schedule.User.name,
+    // }));
 
-    return formatted;
+    // return formatted;
   }
 
   static async cancelBooking(UserId, bookingId) {

@@ -104,7 +104,7 @@ class AuthServices {
       role: user.role,
     });
 
-    return { accesstoken };
+    return { accesstoken, role: user.role };
   }
 }
 

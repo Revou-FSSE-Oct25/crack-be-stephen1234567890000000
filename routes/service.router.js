@@ -4,7 +4,7 @@ const ServiceController = require("../controller/service.controller");
 const authMiddleware = require("../middleware/authentication.middleware");
 const authorizedAdmin = require('../middleware/authoritazion.middleware');
 
-router.get("/", ServiceController.getAllServices);
+  router.get("/", ServiceController.getAllServices);
 router.post("/", authMiddleware, authorizedAdmin, ServiceController.createService);
 
 router.get("/:id", ServiceController.getServiceById);

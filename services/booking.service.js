@@ -120,7 +120,6 @@ class BookingService {
     const transaction = await sequelize.transaction();
     try {
       const booking = await Booking.findByPk(bookingId, {
-        include: Schedule,
         transaction: transaction,
         lock: transaction.LOCK.UPDATE,
       });
@@ -139,15 +138,20 @@ class BookingService {
         };
       }
 
-      if (booking.status !== "pending") {
+      if (booking.status !== "confirmed") {
         throw {
           statusCode: 400,
-          message: "Booking status are not pending",
+          message: "Booking status are not confirmed",
         };
       }
 
+      const schedule = await Schedule.findByPk(booking.ScheduleId, {
+        transaction: transaction,
+        lock: transaction.LOCK.UPDATE,
+      });
+
       const scheduleTimeDate = new Date(
-        booking.Schedule.date + " " + booking.Schedule.startTime,
+        schedule.date + " " + schedule.startTime,
       );
 
       const now = new Date();
@@ -164,8 +168,8 @@ class BookingService {
       booking.status = "cancelled";
       await booking.save({ transaction: transaction });
 
-      booking.Schedule.capacity += 1;
-      await booking.Schedule.save({ transaction: transaction });
+      schedule.capacity += 1;
+      await schedule.save({ transaction: transaction });
 
       await transaction.commit();
 

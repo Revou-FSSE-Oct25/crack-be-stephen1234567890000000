@@ -49,13 +49,16 @@ class BookingService {
               date: schedule.date,
               [Op.and]: [
                 { startTime: { [Op.lt]: schedule.endTime } },
-                { startTime: { [Op.gt]: schedule.startTime } },
+                { endTime: { [Op.gt]: schedule.startTime } },
               ],
             },
           },
         ],
-        where: UserId,
-        status: "confirmed",
+        where: {
+          UserId,
+          status: "confirmed",
+        },
+        transaction,
       });
 
       if (conflictBook) {
@@ -175,6 +178,11 @@ class BookingService {
 
       return booking;
     } catch (error) {
+      console.log("FULL ERROR:", error);
+      console.log("ERROR NAME:", error.name);
+      console.log("ERROR MESSAGE:", error.message);
+      console.log("ERROR ERRORS:", error.errors);
+      console.log("ERROR PARENT:", error.parent);
       await transaction.rollback();
       throw error;
     }

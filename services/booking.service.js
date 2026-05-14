@@ -1,5 +1,11 @@
 const { where } = require("sequelize");
-const { Booking, Schedule, User, sequelize } = require("../models/index");
+const {
+  Booking,
+  Schedule,
+  User,
+  sequelize,
+  Service,
+} = require("../models/index");
 const { Op } = require("sequelize");
 const { lock } = require("../routes");
 
@@ -97,6 +103,9 @@ class BookingService {
             {
               model: User,
               attribute: ["id", "name", "email"],
+            },
+            {
+              model: Service,
             },
           ],
         },

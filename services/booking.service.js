@@ -271,7 +271,14 @@ class BookingService {
       include: [
         {
           model: Schedule,
-          include: User,
+          include: [
+            {
+              model: User,
+            },
+            {
+              model: Service,
+            },
+          ],
         },
       ],
       order: [[{ model: Schedule }, "date", "ASC"]],

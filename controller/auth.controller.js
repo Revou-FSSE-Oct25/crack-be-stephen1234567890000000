@@ -22,7 +22,7 @@ class AuthController {
 
   static async login(req, res, next) {
     try {
-      const {email, password} = req.body;
+      const { email, password } = req.body;
       const result = await AuthServices.login(email, password);
 
       if (!result) {
@@ -32,6 +32,39 @@ class AuthController {
         });
       }
 
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getMe(req, res, next) {
+    try {
+      const UserId = req.user.id;
+      const result = await AuthServices.getMe(UserId);
+      if (!result) {
+        return next({
+          statusCode: 404,
+          message: "User not found",
+        });
+      }
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async updateMe(req, res, next) {
+    try {
+      const { name, email, password } = req.body;
+      const UserId = req.user.id;
+      const result = await AuthServices.updateMe(UserId, name, email, password);
+      if (!result) {
+        return next({
+          statusCode: 404,
+          message: "User not found",
+        });
+      }
       res.status(200).json(result);
     } catch (error) {
       next(error);

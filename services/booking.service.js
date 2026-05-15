@@ -220,7 +220,7 @@ class BookingService {
         };
       }
 
-      if (booking.status !== "pending") {
+      if (booking.status !== "confirmed") {
         throw {
           statusCode: 400,
           message: "Cannot reSchedule",

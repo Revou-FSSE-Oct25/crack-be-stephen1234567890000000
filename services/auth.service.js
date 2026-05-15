@@ -2,6 +2,7 @@ const { where } = require("sequelize");
 const { User } = require("../models/index");
 const { token } = require("../utils/jwt");
 const { comparePassword } = require("../utils/bcrypt");
+const e = require("express");
 
 class AuthServices {
   static async register(name, email, password) {
@@ -105,6 +106,33 @@ class AuthServices {
     });
 
     return { accesstoken, role: user.role };
+  }
+
+  static async getMe(UserId) {
+    const user = await User.findByPk(UserId, {
+      exclude: ["password", "createdAt", "updatedAt"],
+    });
+
+    if (!user) {
+      throw {
+        statusCode: 404,
+        message: "User not found",
+      };
+    }
+
+    return user;
+  }
+
+  static async updateMe(UserId, name, email, password) {
+    const user = await User.findByPk(UserId);
+    if (!user) {
+      throw {
+        statusCode: 404,
+        message: "User not found",
+      };
+    }
+    const updatedUser = await user.update({ name, email, password });
+    return updatedUser;
   }
 }
 

@@ -22,3 +22,10 @@ app.listen(port, async () => {
     console.error("Unable to connect to the database:", error);
   }
 });
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Fitness Booking API Running",
+  });
+});
